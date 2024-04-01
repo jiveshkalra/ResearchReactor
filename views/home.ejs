@@ -85,16 +85,17 @@
     </div>
 
     <div id="main" class="w-screen h-[90vh] flex">
-        <div class="">
+        <div class="resize-x overflow-auto min-w-[50vw]">
+            <embed src="" class="w-full h-full border border-black" type="application/pdf" />
+        </div>
+        <div class="p-4 grow max-h-[90vh] overflow-y-auto"id='chats'>
+            <h1 class="p-2 m-2 text-5xl font-bold">Chats</h1>
             <!-- Modal toggle -->
             <button onclick="modal.show()"
                 class="hidden block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
                 type="button">
                 Load From URL
             </button>
-        </div>
-        <div class="resize-x overflow-auto">
-            <embed src="" class="w-full h-full border border-black" type="application/pdf" />
         </div>
     </div>
     <div class="flex w-screen justify-center h-[10vh] py-2 px-4 bg-primary">
@@ -127,15 +128,22 @@
             enabled = true;
         }
         function Chat() {
-            if (!enabled) { return }
+            if (!enabled || document.querySelector('#chatQuery').value.trim() == '') { return }
             let frm = new FormData();
             frm.append('query', document.querySelector('#chatQuery').value)
+            document.querySelector('#chats').innerHTML += `<div class="border border-black rounded-r-xl rounded-b-xl p-2 ">User: ${document.querySelector('#chatQuery').value}</div><br>`;
+            enabled = false;
+            document.querySelector('#chatQuery').value = ''
             fetch(serverLinnk + '/chat', {
                 method: 'POST',
                 body: frm
             }).then(e => {
                 e.text().then(e => {
                     console.log(e)
+                    document.querySelector('#chats').innerHTML += `<div class="bg-secondary rounded-l-xl rounded-b-xl p-2">AI: ${JSON.parse(e).response}</div><br>`;
+                    document.querySelector('#chats').children[document.querySelector('#chats').children.length - 2].scrollIntoView()
+                    enabled = true;
+                    document.querySelector('#chatQuery').focus();
                 })
             }).catch(e => {
                 console.error(e)
