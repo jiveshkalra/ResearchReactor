@@ -131,8 +131,9 @@
             if (!enabled || document.querySelector('#chatQuery').value.trim() == '') { return }
             let frm = new FormData();
             frm.append('query', document.querySelector('#chatQuery').value)
-            document.querySelector('#chats').innerHTML += `<div class="border border-black rounded-r-xl rounded-b-xl p-2 ">User: ${document.querySelector('#chatQuery').value}</div><br>`;
+            document.querySelector('#chats').innerHTML += `<div class="border-4 border-secondary rounded-r-xl rounded-b-xl p-2 ">User: ${document.querySelector('#chatQuery').value}</div><br>`;
             enabled = false;
+            document.querySelector('#chats').children[document.querySelector('#chats').children.length - 2].scrollIntoView()
             document.querySelector('#chatQuery').value = ''
             fetch(serverLinnk + '/chat', {
                 method: 'POST',
@@ -140,7 +141,7 @@
             }).then(e => {
                 e.text().then(e => {
                     console.log(e)
-                    document.querySelector('#chats').innerHTML += `<div class="bg-secondary rounded-l-xl rounded-b-xl p-2">AI: ${JSON.parse(e).response}</div><br>`;
+                    document.querySelector('#chats').innerHTML += `<div class="border-4 border-black rounded-l-xl rounded-b-xl p-2">AI: ${JSON.parse(e).response}</div><br>`;
                     document.querySelector('#chats').children[document.querySelector('#chats').children.length - 2].scrollIntoView()
                     enabled = true;
                     document.querySelector('#chatQuery').focus();
