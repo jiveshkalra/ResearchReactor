@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Paper Analyser</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FB1048',
+                        secondary: '#FDB774',
+                        accent: '#FCC545',
+                        text: '#240107',
+                        bg: '#FFEDF0',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-bg text-text">
+    <nav class="p-4 flex bg-secondary justify-between h-[10vh]">
+        <div class="flex p-2 align-middle">
+            <img src="logo.jpg" alt="logo" class="h-[2rem] aspect-square">
+            <h1 class="px-2 align-middle text-[1rem]">Research Paper Analyser</h1>
+        </div>
+        <div class="p-2">
+            <a href="/" class="px-4">Home</a>
+            <a href="/FAQs" class="px-4">FAQs</a>
+            <a href="/credits" class="px-4">Credits</a>
+            <a href="https://patreon.com" class="px-4">Support</a>
+        </div>
+    </nav>
+    <div id="main" class="w-screen h-[80vh] flex">
+        <div class="grow m-4">
+            <div data-user="user" class="p-4 my-6 mr-6 rounded-r-xl rounded-b-xl  bg-accent">
+                i requre research papers regarding generating description of images... key workds: VLM, Vision Language
+                Model
+            </div>
+            <div data-user="ai" class="p-4 my-6 ml-6 rounded-l-xl rounded-b-xl  bg-primary">
+                Searching.... <br>
+                7000 papers found <br>
+                100 relevant papers extracted :-<br>
+                <hr class="p-1">
+                <div class='max-h-[15vh] overflow-y-scroll bg-accent'>
+                    <button class="hover:bg-primary bg-accent p-1 m-2 rounded">Paper1</button>
+                    <button class="hover:bg-primary bg-accent p-1 m-2 rounded">Paper1</button>
+                    <button class="hover:bg-primary bg-accent p-1 m-2 rounded">Paper1</button>
+                    <button class="hover:bg-primary bg-accent p-1 m-2 rounded">Paper2</button>
+                    <button class="hover:bg-primary bg-accent p-1 m-2 rounded">Paper3</button>
+                    <button class="hover:bg-primary bg-accent p-1 m-2 rounded">Paper4</button>
+                    <button class="hover:bg-primary bg-accent p-1 m-2 rounded">Paper4</button>
+                    <button class="hover:bg-primary bg-accent p-1 m-2 rounded">Paper4</button>
+                    <button class="hover:bg-primary bg-accent p-1 m-2 rounded">Paper4</button>
+                    <button class="hover:bg-primary bg-accent p-1 m-2 rounded">Paper4</button>
+                    <button class="hover:bg-primary bg-accent p-1 m-2 rounded">Paper4</button>
+                    <button class="hover:bg-primary bg-accent p-1 m-2 rounded">Paper4</button>
+                    <button class="hover:bg-primary bg-accent p-1 m-2 rounded">Paper4</button>
+                    <button class="hover:bg-primary bg-accent p-1 m-2 rounded">Paper4</button>
+                    <button class="hover:bg-primary bg-accent p-1 m-2 rounded">Paper4</button>
+                    <button class="hover:bg-primary bg-accent p-1 m-2 rounded">Paper4</button>
+                    <button class="hover:bg-primary bg-accent p-1 m-2 rounded">Paper4</button>
+                    <button class="hover:bg-primary bg-accent p-1 m-2 rounded">Paper4</button>
+                </div>
+            </div>
+        </div>
+        <div class="w-[39vw]">
+            <embed src="https://arxiv.org/pdf/1706.03762.pdf" class='w-[39vw] h-full border border-black'
+                type="application/pdf">
+        </div>
+    </div>
+    <div class="flex w-screen justify-center h-[10vh] py-2 px-4 border border-black bg-accent">
+        <input class="border border-black rounded-l-lg p-2 w-[95vw] bg-bg" type="text">
+        <button class="border border-black rounded-r-lg bg-accent w-[5vw]">
+            <span class="material-symbols-outlined">
+                search
+            </span>
+        </button>
+    </div>
+</body>
+
+</html>
