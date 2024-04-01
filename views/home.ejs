@@ -40,49 +40,48 @@
   </head>
 
   <body class="bg-background text-text">
-    <nav class="p-4 flex bg-primary justify-between h-[10vh]">
-      <div class="flex p-2 align-middle">
-        <img src="logo.jpg" alt="logo" class="h-[2rem] aspect-square" />
-        <h1 class="px-2 align-middle text-[1rem]">Research Paper Analyser</h1>
+      <div id="loadFromURL" class="hidden absolute w-screen h-screen bg-primary ">
+          <button class='p-4 text-white bg-red-600 hover:bg-red-500 active:bg-red-300' onclick="LoadModal()">X</button>
+          <br>
+          <br>
+          <label for="url">Url to load:</label><input type="url" name="url" id="url" onkeypress="if(event.key == 'Enter')uploadURL()">
+          <br>
+          <br>
+          <button onclick="uploadURL()" class="bg-secondary hover:bg-accent px-4 py-2 rounded-xl">Submit</button>
       </div>
-      <div class="p-2">
-        <a href="/" class="px-4">Home</a>
-        <a href="/FAQs" class="px-4">FAQs</a>
-        <a href="/credits" class="px-4">Credits</a>
-        <a href="https://patreon.com" class="px-4">Support</a>
-      </div>
-    </nav>
-    <div id="main" class="w-screen h-[80vh] flex">
+    <div id="main" class="w-screen h-[90vh] flex">
       <div class="grow m-4">
-        <div
-          data-user="user"
-          class="p-4 my-6 mr-6 rounded-r-xl rounded-b-xl bg-secondary"
-        >
-          i requre research papers regarding generating description of images...
-          key workds: VLM, Vision Language Model
-        </div>
-        <div
-          data-user="ai"
-          class="p-4 my-6 ml-6 rounded-l-xl rounded-b-xl bg-secondary"
-        >
-          Searching.... <br />
-          7000 papers found <br />
-          100 relevant papers extracted :-<br />
-        </div>
+        <button class="bg-slate-400 hover:bg-slate-300" onclick="LoadModal();">Load From URL</button>
       </div>
       <div class="w-[39vw]">
         <embed
-          src="https://arxiv.org/pdf/1706.03762.pdf"
+          src=""
           class="w-[39vw] h-full border border-black"
           type="application/pdf"
         />
       </div>
     </div>
     <div class="flex w-screen justify-center h-[10vh] py-2 px-4 bg-primary">
-      <input class="rounded-l-lg p-2 w-[95vw] bg-bg border-4 rounded-r-rlg border-accent" type="text" />
+      <input class="rounded-l-lg p-2 w-[95vw] bg-bg border-4 rounded-r-rlg border-accent focus-visible:outline-none" type="text" />
       <button class="rounded-r-lg bg-accent w-[5vw]">
         <span class="material-symbols-outlined"> send </span>
       </button>
     </div>
+    <script>
+        function LoadModal(){
+            document.querySelector('#loadFromURL').classList.toggle('hidden');
+        }
+    </script>
+    <script>
+        const serverLinnk= '';
+        function uploadURL(){
+            let form = new FormData();
+            form.append('url', document.querySelector('#url').value);
+            fetch(serverLinnk + '/init_model', {
+                method: "POST",
+                body: form
+            })
+        }
+    </script>
   </body>
 </html>
