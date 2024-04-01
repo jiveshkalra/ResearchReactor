@@ -1,182 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Research Paper Analyser</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"
+      rel="stylesheet"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        // CYAN
-                        text: "#081211",
-                        background: "#f7fdfc",
-                        primary: "#29d7cc",
-                        secondary: "#7df2eb",
-                        accent: "#41fbf0",
-                        // YELLOW
-                        //  'text': '#141310',
-                        //  'background': '#fdfcfb',
-                        //  'primary': '#d4aa2b',
-                        //  'secondary': '#f1d684',
-                        //  'accent': '#f7c93e',
-                        // GREEN
-                        //  'text': '#09110e',
-                        //  'background': '#f3fbf8',
-                        //  'primary': '#3fd49b',
-                        //  'secondary': '#76f0c1',
-                        //  'accent': '#47fbb6',
-                    },
-                },
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              // CYAN
+              text: "#081211",
+              background: "#f7fdfc",
+              primary: "#29d7cc",
+              secondary: "#7df2eb",
+              accent: "#41fbf0",
+              // YELLOW
+              //  'text': '#141310',
+              //  'background': '#fdfcfb',
+              //  'primary': '#d4aa2b',
+              //  'secondary': '#f1d684',
+              //  'accent': '#f7c93e',
+              // GREEN
+              //  'text': '#09110e',
+              //  'background': '#f3fbf8',
+              //  'primary': '#3fd49b',
+              //  'secondary': '#76f0c1',
+              //  'accent': '#47fbb6',
             },
-        };
+          },
+        },
+      };
     </script>
-</head>
+  </head>
 
-<body class="bg-background text-text">
-
-
-
+  <body class="bg-background text-text">
     <!-- Main modal -->
-    <div id="static-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
-        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-        <div class="relative p-4 w-full max-w-2xl max-h-full">
-            <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow">
-                <!-- Modal header -->
-                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
-                    <h3 class="text-xl font-semibold text-gray-900">
-                        Load From URL
-                    </h3>
-                    <button type="button"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-                        onclick="modal.hide()">
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                        </svg>
-                        <span class="sr-only">Close modal</span>
-                    </button>
-                </div>
-                <!-- Modal body -->
-                <div class="p-4 md:p-5 space-y-4">
-                    <p class="text-base leading-relaxed text-gray-500">
-                        Enter the url of the research paper you wanna use.
-                    </p>
-                    <label for="url" class="text-xl"><b>Url to load: </b> </label><input class="p-2 w-full" type="url"
-                        name="url" id="url" onkeypress="if(event.key == 'Enter')uploadURL()">
-                </div>
-                <!-- Modal footer -->
-                <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b">
-                    <button type="button" id="loadFromURLBtn" onclick="uploadURL()"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
-                        Search</button>
-                </div>
-            </div>
+    <div
+      id="static-modal"
+      data-modal-backdrop="static"
+      tabindex="-1"
+      aria-hidden="true"
+      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+    >
+      <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow">
+          <!-- Modal header -->
+          <div
+            class="flex items-center justify-between p-4 md:p-5 border-b rounded-t"
+          >
+            <h3 class="text-xl font-semibold text-gray-900">Load From URL</h3>
+            <button
+              type="button"
+              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+              onclick="modal.hide()"
+            >
+              <svg
+                class="w-3 h-3"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 14 14"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                />
+              </svg>
+              <span class="sr-only">Close modal</span>
+            </button>
+          </div>
+          <!-- Modal body -->
+          <div class="p-4 md:p-5 space-y-4">
+            <p class="text-base leading-relaxed text-gray-500">
+              Enter the url of the research paper you wanna use.
+            </p>
+            <label for="url" class="text-xl"><b>Url to load: </b> </label
+            ><input
+              class="p-2 w-full"
+              type="url"
+              name="url"
+              id="url"
+              onkeypress="if(event.key == 'Enter')uploadURL()"
+            />
+          </div>
+          <!-- Modal footer -->
+          <div
+            class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b"
+          >
+            <button
+              type="button"
+              id="loadFromURLBtn"
+              onclick="uploadURL()"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+            >
+              Search
+            </button>
+          </div>
         </div>
+      </div>
     </div>
 
     <div id="main" class="w-screen h-[90vh] flex">
-        <div class="resize-x overflow-auto min-w-[50vw]">
-            <embed src="" class="w-full h-full border border-black" type="application/pdf" />
-        </div>
-        <div class="px-4 grow max-h-[90vh] overflow-y-auto bg-white" id='chats'>
-            <h1 class="p-4 text-5xl font-bold w-full">Chats</h1>
-            <!-- Modal toggle -->
-            <!-- <button onclick="modal.show()"
+      <div class="resize-x overflow-auto min-w-[45vw] max-w-[50vw]">
+        <embed src="" class="w-full h-full" type="application/pdf" />
+      </div>
+      <div class="px-4 grow max-h-[90vh] overflow-y-auto bg-white" id="chats">
+        <h1 class="p-4 text-5xl font-bold w-full">Interact With AI</h1>
+        <hr />
+        <!-- Modal toggle -->
+        <!-- <button onclick="modal.show()"
                 class="hidden block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
                 type="button">
                 Load From URL
             </button> -->
-        </div>
+      </div>
     </div>
     <div class="flex w-screen justify-center h-[10vh] py-2 px-4 bg-primary">
-        <input class="rounded-l-lg p-2 w-[95vw] bg-bg border-4 rounded-r-rlg border-accent focus-visible:outline-none"
-            type="text" id="chatQuery" />
-        <button class="rounded-r-lg bg-accent w-[5vw]" onclick="Chat()">
-            <span class="material-symbols-outlined"> send </span>
-        </button>
+      <input
+        class="rounded-l-lg p-2 w-[95vw] bg-bg border-4 rounded-r-rlg border-accent focus-visible:outline-none"
+        type="text"
+        id="chatQuery"
+      />
+      <button
+        class="rounded-r-lg bg-accent w-[5vw]"
+        id="chat_send"
+        onclick="Chat()"
+        disabled
+      >
+        <span class="material-symbols-outlined"> send </span>
+      </button>
     </div>
     <script>
-        modal = new Modal(document.querySelector('#static-modal'));
-        setTimeout(() => {
-            fetch(serverLinnk + '/get_chat', {
-                method: "get",
-                headers: new Headers({
-                    "ngrok-skip-browser-warning": "69420",
-                })
+      modal = new Modal(document.querySelector("#static-modal"));
+      setTimeout(() => {
+        fetch(serverLinnk + "/get_chat", {
+          method: "get",
+          headers: new Headers({
+            "ngrok-skip-browser-warning": "69420",
+          }),
+        }).then((e) => {
+          e.text().then((e) => {
+            let data = JSON.parse(e);
+            if (data.url != "") {
+              uploadURL(data.url);
+            } else {
+              modal.show();
             }
-            ).then((e) => {
-                e.text().then(e => {
-                    let data = JSON.parse(e);
-                    if (data.url != '') {
-                        uploadURL(data.url);
-                    } else {
-                        modal.show();
-                    }
-                    console.log(JSON.parse(data.data).store);
-                    for (let entry of JSON.parse(data.data).store.user1) {
-                        if (entry.role == 'user') {
-                            document.querySelector('#chats').innerHTML += `<div class="border-4 border-secondary rounded-r-xl rounded-b-xl p-2 ">User: ${entry.content}</div><br>`;
-                        } else {
-                            document.querySelector('#chats').innerHTML += `<div class="border-4 border-black rounded-l-xl rounded-b-xl p-2">AI: ${entry.content}</div><br>`;
-                        }
-                    }
-                    document.querySelector('#chats').children[document.querySelector('#chats').children.length - 2].scrollIntoView()
-                })
+            console.log(JSON.parse(data.data).store);
+            for (let entry of JSON.parse(data.data).store.user1) {
+              if (entry.role == "user") {
+                document.querySelector(
+                  "#chats"
+                ).innerHTML += `<div class="border-4 border-secondary rounded-r-xl rounded-b-xl p-2 ">User: ${entry.content}</div><br>`;
+              } else {
+                document.querySelector(
+                  "#chats"
+                ).innerHTML += `<div class="border-4 border-black rounded-l-xl rounded-b-xl p-2">AI: ${entry.content}</div><br>`;
+              }
+            }
+            document
+              .querySelector("#chats")
+              .children[
+                document.querySelector("#chats").children.length - 2
+              ].scrollIntoView();
+          });
+        });
+      }, 100);
+      function LoadModal() {
+        document.querySelector("#loadFromURL").classList.toggle("hidden");
+      }
+      const serverLinnk = "https://herring-notable-physically.ngrok-free.app";
+      function uploadURL(url = document.querySelector("#url").value) {
+        modal.hide();
+        let form = new FormData();
+        form.append("url", url);
+        fetch(serverLinnk + "/init_model", {
+          method: "POST",
+          body: form,
+        })
+          .then((e) =>
+            e.text().then((e) => {
+              console.log(e);
+              allowChats(url);
             })
-        }, 100)
-        function LoadModal() {
-            document.querySelector('#loadFromURL').classList.toggle('hidden');
-        }
-        const serverLinnk = "https://herring-notable-physically.ngrok-free.app";
-        function uploadURL(url = document.querySelector('#url').value) {
-            modal.hide();
-            let form = new FormData();
-            form.append('url', url);
-            fetch(serverLinnk + '/init_model', {
-                method: "POST",
-                body: form
-            }).then((e) => e.text().then(e => { console.log(e); allowChats(url) })).catch((e) => { console.error(e) })
-        }
-        let enabled = false;
-        function allowChats(url = document.querySelector('#url').value) {
-            document.querySelector('embed').src = url;
-            console.log('chatting');
-            enabled = true;
-        }
-        function Chat() {
-            if (!enabled || document.querySelector('#chatQuery').value.trim() == '') { return }
-            let frm = new FormData();
-            frm.append('query', document.querySelector('#chatQuery').value)
-            document.querySelector('#chats').innerHTML += `<div class="border-4 border-secondary rounded-r-xl rounded-b-xl p-2 ">User: ${document.querySelector('#chatQuery').value}</div><br>`;
-            enabled = false;
-            document.querySelector('#chats').children[document.querySelector('#chats').children.length - 2].scrollIntoView()
-            document.querySelector('#chatQuery').value = ''
-            fetch(serverLinnk + '/chat', {
-                method: 'POST',
-                body: frm
-            }).then(e => {
-                e.text().then(e => {
-                    console.log(e)
-                    document.querySelector('#chats').innerHTML += `<div class="border-4 border-black rounded-l-xl rounded-b-xl p-2">AI: ${JSON.parse(e).response}</div><br>`;
-                    document.querySelector('#chats').children[document.querySelector('#chats').children.length - 2].scrollIntoView()
-                    enabled = true;
-                    document.querySelector('#chatQuery').focus();
-                })
-            }).catch(e => {
-                console.error(e)
-            })
-        }
-    </script>
-</body>
+          )
+          .catch((e) => {
+            console.error(e);
+          });
+      }
+      let enabled = false;
 
+      function disable_chat() {
+        chat_btn = document.querySelector("#chat_send");
+        chat_btn.disabled = true;
+        chat_btn.style.backgroundColor = "gray";
+      }
+      function enable_chat() {
+        chat_btn = document.querySelector("#chat_send");
+        chat_btn.disabled = false;
+        chat_btn.style.backgroundColor = "#41FBF0";
+      }
+
+      function allowChats(url = document.querySelector("#url").value) {
+        document.querySelector("embed").src = url;
+        enabled = true;
+      }
+      function Chat() {
+        if (
+          !enabled ||
+          document.querySelector("#chatQuery").value.trim() == ""
+        ) {
+          return;
+        }
+        disable_chat();
+        let frm = new FormData();
+        frm.append("query", document.querySelector("#chatQuery").value);
+        document.querySelector(
+          "#chats"
+        ).innerHTML += `<div class="border-4 border-secondary rounded-r-xl rounded-b-xl p-2 ">User: ${
+          document.querySelector("#chatQuery").value
+        }</div><br>`;
+        enabled = false;
+        document
+          .querySelector("#chats")
+          .children[
+            document.querySelector("#chats").children.length - 2
+          ].scrollIntoView();
+        document.querySelector("#chatQuery").value = "";
+        document.querySelector("#chats").innerHTML += `<div class="border-4 border-black rounded-l-xl rounded-b-xl p-2 flex flex-column"> AI:   <img src="./Iphone-spinner-2.gif" width="20" height="20"></div><br>`;
+        fetch(serverLinnk + "/chat", {
+          method: "POST",
+          body: frm,
+        })
+          .then((e) => {
+            e.text().then((e) => {
+              console.log(e);
+              document.querySelector("#chats").innerHTML += `<div class="border-4 border-black rounded-l-xl rounded-b-xl p-2">AI: ${
+                JSON.parse(e).response
+              }</div><br>`;
+              document
+                .querySelector("#chats")
+                .children[document.querySelector("#chats").children.length - 2].scrollIntoView();
+              enabled = true;
+              document.querySelector("#chatQuery").focus();
+              enable_chat();
+            });
+          })
+          .catch((e) => {
+            console.error(e);
+            enable_chat();
+          });
+      }
+    </script>
+  </body>
 </html>
