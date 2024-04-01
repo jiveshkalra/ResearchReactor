@@ -85,16 +85,16 @@
     </div>
 
     <div id="main" class="w-screen h-[90vh] flex">
-        <div class="grow m-4">
+        <div class="">
             <!-- Modal toggle -->
             <button onclick="modal.show()"
-                class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
+                class="hidden block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
                 type="button">
                 Load From URL
             </button>
         </div>
-        <div class="w-[39vw]">
-            <embed src="" class="w-[39vw] h-full border border-black" type="application/pdf" />
+        <div class="resize-x overflow-auto">
+            <embed src="" class="w-full h-full border border-black" type="application/pdf" />
         </div>
     </div>
     <div class="flex w-screen justify-center h-[10vh] py-2 px-4 bg-primary">
