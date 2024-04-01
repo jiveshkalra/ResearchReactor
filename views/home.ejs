@@ -114,8 +114,8 @@
     </div>
     <div class="flex w-screen justify-center h-[10vh] py-2 px-4 bg-primary">
         <input class="rounded-l-lg p-2 w-[95vw] bg-bg border-4 rounded-r-rlg border-accent focus-visible:outline-none"
-            type="text" />
-        <button class="rounded-r-lg bg-accent w-[5vw]">
+            type="text" id="chatQuery" />
+        <button class="rounded-r-lg bg-accent w-[5vw]" onclick="Chat()">
             <span class="material-symbols-outlined"> send </span>
         </button>
     </div>
@@ -135,8 +135,26 @@
                 body: form
             }).then((e) => e.text().then(e => { console.log(e); allowChats() })).catch((e) => { console.error(e) })
         }
+        let enabled = false;
         function allowChats(){
-            cosnole.log('chatting')
+            document.querySelector('embed').src = document.querySelector('#url').value;
+            console.log('chatting');
+            enabled = true;
+        }
+        function Chat(){
+            if(!enabled)return
+            let frm = new FormData();
+            frm.append('query', document.querySelector('#chatQuery').value)
+            fetch(serverLinnk + '/chat', {
+                method: 'POST',
+                body: frm
+            }).then(e=>{
+                e.text().then(e=>{
+                    console.log(e)
+                })
+            }).catch(e=>{
+                console.error(e)
+            })
         }
     </script>
 </body>
