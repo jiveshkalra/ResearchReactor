@@ -88,14 +88,14 @@
         <div class="resize-x overflow-auto min-w-[50vw]">
             <embed src="" class="w-full h-full border border-black" type="application/pdf" />
         </div>
-        <div class="p-4 grow max-h-[90vh] overflow-y-auto"id='chats'>
-            <h1 class="p-2 m-2 text-5xl font-bold">Chats</h1>
+        <div class="px-4 grow max-h-[90vh] overflow-y-auto bg-white" id='chats'>
+            <h1 class="p-4 text-5xl font-bold w-full">Chats</h1>
             <!-- Modal toggle -->
-            <button onclick="modal.show()"
+            <!-- <button onclick="modal.show()"
                 class="hidden block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
                 type="button">
                 Load From URL
-            </button>
+            </button> -->
         </div>
     </div>
     <div class="flex w-screen justify-center h-[10vh] py-2 px-4 bg-primary">
@@ -107,23 +107,49 @@
     </div>
     <script>
         modal = new Modal(document.querySelector('#static-modal'));
-        setTimeout(() => { modal.show() }, 100)
+        setTimeout(() => {
+            fetch(serverLinnk + '/get_chat', {
+                method: "get",
+                headers: new Headers({
+                    "ngrok-skip-browser-warning": "69420",
+                })
+            }
+            ).then((e) => {
+                e.text().then(e => {
+                    let data = JSON.parse(e);
+                    if (data.url != '') {
+                        uploadURL(data.url);
+                    } else {
+                        modal.show();
+                    }
+                    console.log(JSON.parse(data.data).store);
+                    for (let entry of JSON.parse(data.data).store.user1) {
+                        if (entry.role == 'user') {
+                            document.querySelector('#chats').innerHTML += `<div class="border-4 border-secondary rounded-r-xl rounded-b-xl p-2 ">User: ${entry.content}</div><br>`;
+                        } else {
+                            document.querySelector('#chats').innerHTML += `<div class="border-4 border-black rounded-l-xl rounded-b-xl p-2">AI: ${entry.content}</div><br>`;
+                        }
+                    }
+                    document.querySelector('#chats').children[document.querySelector('#chats').children.length - 2].scrollIntoView()
+                })
+            })
+        }, 100)
         function LoadModal() {
             document.querySelector('#loadFromURL').classList.toggle('hidden');
         }
         const serverLinnk = "https://herring-notable-physically.ngrok-free.app";
-        function uploadURL() {
+        function uploadURL(url = document.querySelector('#url').value) {
             modal.hide();
             let form = new FormData();
-            form.append('url', document.querySelector('#url').value);
+            form.append('url', url);
             fetch(serverLinnk + '/init_model', {
                 method: "POST",
                 body: form
-            }).then((e) => e.text().then(e => { console.log(e); allowChats() })).catch((e) => { console.error(e) })
+            }).then((e) => e.text().then(e => { console.log(e); allowChats(url) })).catch((e) => { console.error(e) })
         }
         let enabled = false;
-        function allowChats() {
-            document.querySelector('embed').src = document.querySelector('#url').value;
+        function allowChats(url = document.querySelector('#url').value) {
+            document.querySelector('embed').src = url;
             console.log('chatting');
             enabled = true;
         }
