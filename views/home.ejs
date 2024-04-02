@@ -157,7 +157,7 @@
           e.text().then((e) => {
             let data = JSON.parse(e);
             if (data.url != "") {
-              uploadURL(data.url);
+              allowChats(data.url);
             } else {
               modal.show();
             }
@@ -207,8 +207,7 @@
 
       function disable_chat() {
         chat_btn = document.querySelector("#chat_send");
-        chat_btn.disabled = true;
-        chat_btn.style.backgroundColor = "gray";
+        chat_btn.disabled = true; 
       }
       function enable_chat() {
         chat_btn = document.querySelector("#chat_send");
@@ -218,6 +217,7 @@
 
       function allowChats(url = document.querySelector("#url").value) {
         document.querySelector("embed").src = url;
+        enable_chat();
         enabled = true;
       }
       function Chat() {
@@ -242,7 +242,7 @@
             document.querySelector("#chats").children.length - 2
           ].scrollIntoView();
         document.querySelector("#chatQuery").value = "";
-        document.querySelector("#chats").innerHTML += `<div class="border-4 border-black rounded-l-xl rounded-b-xl p-2 flex flex-column"> AI:   <img src="./Iphone-spinner-2.gif" width="20" height="20"></div><br>`;
+        document.querySelector("#chats").innerHTML += `<div class="border-4 border-black rounded-l-xl rounded-b-xl p-2 flex flex-column"> AI:   <img src="./loading.gif" width="20" height="20"></div><br>`;
         fetch(serverLinnk + "/chat", {
           method: "POST",
           body: frm,
@@ -251,7 +251,7 @@
             e.text().then((e) => {
               console.log(e);
               document.querySelector("#chats").innerHTML += `<div class="border-4 border-black rounded-l-xl rounded-b-xl p-2">AI: ${
-                JSON.parse(e).response
+                JSON.parse(e).response 
               }</div><br>`;
               document
                 .querySelector("#chats")
