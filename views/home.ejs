@@ -242,7 +242,7 @@
             document.querySelector("#chats").children.length - 2
           ].scrollIntoView();
         document.querySelector("#chatQuery").value = "";
-        document.querySelector("#chats").innerHTML += `<div class="border-4 border-black rounded-l-xl rounded-b-xl p-2 flex flex-column"> AI:   <img src="./loading.gif" width="20" height="20"></div><br>`;
+        document.querySelector("#chats").innerHTML += `<div class="border-4 border-black rounded-l-xl rounded-b-xl p-2 flex flex-column"> AI:   <img src="./loading.gif" class="w-[40px] aspect-[16/9]"></div><br>`;
         fetch(serverLinnk + "/chat", {
           method: "POST",
           body: frm,
