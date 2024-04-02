@@ -250,9 +250,9 @@
           .then((e) => {
             e.text().then((e) => {
               console.log(e);
-              document.querySelector("#chats").innerHTML += `<div class="border-4 border-black rounded-l-xl rounded-b-xl p-2">AI: ${
+              document.querySelector("#chats").children[document.querySelector('#chats').children.length - 2].innerHTML = `<span>AI: ${
                 JSON.parse(e).response 
-              }</div><br>`;
+              }</span>`;
               document
                 .querySelector("#chats")
                 .children[document.querySelector("#chats").children.length - 2].scrollIntoView();
